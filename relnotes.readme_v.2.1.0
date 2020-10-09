@@ -1,0 +1,48 @@
+Minor change
+
+DESCRIPTION OF CHANGE:  
+
+Modification made for the directory path name changes by GFS V16.  Two files different from RTOFS V2.0.0
+./ush/rtofs_atmforcing_getges.sh 
+./ush/rtofs_atmforcing_stage.sh
+
+BENEFIT OF CHANGE: 
+
+Need this change to run with GFS V16.
+
+RISKS:
+
+IMPLEMENTATION INSTRUCTIONS:
+-------------------
+
+I.1)  Check out RTOFS_GLOBAL:
+       git clone --single-branch -b RB-2.1.0 ssh://$LOGNAME@vlab.ncep.noaa.gov:29418/EMC_rtofs_glo_prod rtofs_glo.v2.1.0
+       into /gpfs/dell1/nco/ops/nwprod/
+       The result will be the directory rtofs_glo.v2.1.0
+
+I.2)  Get the fix files
+       mkdir fix
+       cp -R /gpfs/dell2/emc/modeling/noscrub/emc.ncodapa/FIXFILES/v2.0.0/fix/ fix
+
+
+II. COMPILE PROJECT SOURCE CODES
+--------------------------------
+(no changes in source code from V2.0.0.  This is left here for reference.
+
+# libraries
+cd libs
+./build_libs.sh
+
+# source
+cd sorc
+./build_rtofs.sh clean
+./build_rtofs.sh compile
+./build_rtofs.sh install
+
+
+III. RESTRICTED CODES
+-------------------
+
+The codes in sorc/rtofs_ncoda.fd are restricted and cannot be shared outside of NCEP.  
+They also cannot be put on the rzdm server.
+
